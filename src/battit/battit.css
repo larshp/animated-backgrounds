@@ -1,0 +1,9 @@
+body {
+  background: rgb(38, 41, 34);
+  color: #FFF;
+  font-family: sans-serif;
+}
+
+canvas {
+  display: block; /* To remove the scrollbars */
+}
