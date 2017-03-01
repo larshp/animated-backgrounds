@@ -1,0 +1,45 @@
+body {
+  background: rgb(38, 41, 34);
+  color: #FFF;
+  font-family: sans-serif;
+}
+
+.square {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity : 0;
+  }
+  to {
+    opacity : 1;
+  }
+}
+
+.runIn {
+  animation: fadeIn 3s ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity : 1;
+  }
+  to {
+    opacity : 0;
+  }
+}
+
+.runOut {
+  animation: fadeOut 3s ease;
+  animation-fill-mode: forwards;
+}
+
+.runFall {
+  transform: translateY(calc(100vh));
+  transition: transform 1s ease-in;
+}
