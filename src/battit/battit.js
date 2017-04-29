@@ -1,6 +1,8 @@
 let points = [];
+let edges = [];
 let ctx = null;
 var timer = null;
+let colors = ["#f0ab00","#0faaff","#93c939","#760a85","#444532"];
 
 function distance(a, b) {
   return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
@@ -13,12 +15,18 @@ function findClosest(point) {
     if(point.x === points[i].x && point.y === points[i].y) {
       continue;
     }
-    closest.push({distance: distance(point, points[i]), from: point, to: points[i]});
+    closest.push({
+      distance: distance(point, points[i]),
+      from: point,
+      to: points[i],
+      color: colors[closest.length % 5]});
   }
 
   closest = closest.sort(function(a, b) {
     return a.distance - b.distance;
-  }).slice(0, 3);
+  }).slice(0, 1);
+
+// todo, remove identical from closest(from + to)
 
   return closest;
 }
@@ -26,19 +34,17 @@ function findClosest(point) {
 function draw() {
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-  let closest = [];
-
   for(let i=0;i<points.length;i++) {
+    /*
     ctx.beginPath();
     ctx.arc(points[i].x, points[i].y, 3, 0, Math.PI*2, true);
     ctx.closePath();
     ctx.fillStyle = '#00ff00';
     ctx.fill();
+    */
 
     points[i].x = points[i].x + points[i].vector.x;
     points[i].y = points[i].y + points[i].vector.y;
-
-    closest = closest.concat(findClosest(points[i]));
 
     if (points[i].x > window.innerWidth || points[i].x < 0) {
       points[i].vector.x = -points[i].vector.x;
@@ -48,13 +54,11 @@ function draw() {
     }
   }
 
-// todo, remove identical from closest(from + to)
-
-  for(let i=0;i<closest.length;i++) {
+  for(let i=0;i<edges.length;i++) {
     ctx.beginPath();
-    ctx.moveTo(closest[i].from.x,closest[i].from.y);
-    ctx.lineTo(closest[i].to.x,closest[i].to.y);
-    ctx.strokeStyle = '#ff0000';
+    ctx.moveTo(edges[i].from.x, edges[i].from.y);
+    ctx.lineTo(edges[i].to.x, edges[i].to.y);
+    ctx.strokeStyle = edges[i].color;
     ctx.stroke();
     ctx.closePath();
   }
@@ -78,6 +82,10 @@ function initialize(count = 30) {
         x: Math.floor(Math.random() * window.innerWidth) + 1 ,
         y: Math.floor(Math.random() * window.innerHeight) + 1,
         vector: vector});
+    }
+
+    for(let i=0;i<points.length;i++) {
+      edges = edges.concat(findClosest(points[i]));
     }
 //    console.dir(points);
 
