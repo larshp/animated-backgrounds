@@ -8,6 +8,14 @@ body {
   position: fixed;
   left: 5px;
   bottom: 5px;
-  height: 200px;
+  height: 75vh;
   width: calc(100vw - 10px);
+}
+
+.box-text {
+  position: fixed;
+  text-align: center;
+  font-weight: bolder;
+  top: 30vh;
+  font-size: 20vh;
 }

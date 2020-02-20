@@ -4,9 +4,10 @@ let dra;
 
 const configuration = {
   count: 300,
-  minWidth: 15,
-  maxWidth: 25,
+  minWidth: 25,
+  maxWidth: 60,
   minHeight: 50,
+  topRadius: 20,
   colorMax: 200,
   colorMin: 100,
 };
@@ -56,6 +57,7 @@ function drawGrass() {
     const bottomRight = [leaf.left + leaf.width, height];
 //    const bottomMiddle = [leaf.left + (leaf.width / 2), height];
     const top = [leaf.left + (leaf.width / 2), height - leaf.height];
+    top[0] = top[0] + random(-configuration.topRadius, configuration.topRadius);
 
     var polygon = draw.polygon();
     polygon.plot([bottomLeft, top, bottomRight]).fill(leaf.gradient)
