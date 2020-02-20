@@ -1,0 +1,13 @@
+body {
+  background: rgb(38, 41, 34);
+  color: #FFF;
+  font-family: sans-serif;
+}
+
+.box-grass {
+  position: fixed;
+  left: 5px;
+  bottom: 5px;
+  height: 200px;
+  width: calc(100vw - 10px);
+}
