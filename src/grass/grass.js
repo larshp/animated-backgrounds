@@ -3,7 +3,7 @@ let height = 0;
 let dra;
 
 const configuration = {
-  count: 300,
+  leafCountFactor: 10,
   minWidth: 25,
   maxWidth: 60,
   minHeight: 50,
@@ -38,7 +38,10 @@ function random(min, max) {
 
 function randomLeafs() {
   let leafs = [];
-  for (let i = 0; i < configuration.count; i++) {
+
+  const count = ( width / configuration.maxWidth ) * configuration.leafCountFactor;
+
+  for (let i = 0; i < count; i++) {
     leafs.push({
       left: Math.floor(Math.random() * width),
       width: random(configuration.minWidth, configuration.maxWidth),
@@ -60,7 +63,18 @@ function drawGrass() {
     top[0] = top[0] + random(-configuration.topRadius, configuration.topRadius);
 
     var polygon = draw.polygon();
-    polygon.plot([bottomLeft, top, bottomRight]).fill(leaf.gradient)
+    polygon.plot([bottomLeft, top, bottomRight]).fill(leaf.gradient);
+/*
+    const vector1 = [bottomLeft[0], bottomLeft[1] - (leaf.height / 2)];
+    const path1 = "M" + bottomLeft[0] + " " + bottomLeft[1] + " Q " + vector1[0] + " " + vector1[1] + " " + top[0] + " " + top[1];
+    draw.path(path1).stroke({ width: 2, color: "red" });
+
+    const vector2 = [bottomRight[0], bottomRight[1] - (leaf.height / 2)];
+    const path2 = "M" + bottomRight[0] + " " + bottomRight[1] + " Q " + vector2[0] + " " + vector2[1] + " " + top[0] + " " + top[1];
+    draw.path(path2).stroke({ width: 2, color: "red" });
+*/
+// thin grass
+//    draw.path(path2 + " " + path1 + "Z").fill(leaf.gradient)
   }
 
 }
