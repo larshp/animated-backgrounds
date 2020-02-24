@@ -6,10 +6,9 @@ body {
 
 .box-grass {
   position: fixed;
-  left: 5px;
-  bottom: 5px;
+  bottom: 0px;
   height: 75vh;
-  width: calc(100vw - 10px);
+  width: 100vw;
 }
 
 .box-text {
