@@ -89,6 +89,8 @@ class Grass {
     div.innerHTML = "";
     this.draw = SVG().addTo('#grass').size(this.width, this.height);
     this.drawGrass();
+
+    return this;
   }
 
   registerEvents() {
@@ -96,4 +98,9 @@ class Grass {
   }
 }
 
-new Grass("grass").run();
+const g = new Grass("grass").run();
+
+// eslint-disable-next-line no-unused-vars
+function run() {
+  g.run();
+}

@@ -19,17 +19,19 @@
   "eslintConfig": {
     "root": true,
     "env": {
-        "browser": true
+      "browser": true
     },
-    "parserOptions": { "ecmaVersion": 6 },
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
     "extends": [
-        "eslint:recommended"
+      "eslint:recommended"
     ],
     "rules": {
       "semi": [
         "error",
         "always"
-    ]
+      ]
     }
   },
   "homepage": "https://github.com/larshp/animated-backgrounds#readme",
