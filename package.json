@@ -1,0 +1,39 @@
+{
+  "name": "animated-backgrounds",
+  "version": "1.0.0",
+  "private": true,
+  "description": "https://larshp.github.io/animated-backgrounds/src/",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint src/**/*.js --format unix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larshp/animated-backgrounds.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/larshp/animated-backgrounds/issues"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+        "browser": true
+    },
+    "parserOptions": { "ecmaVersion": 6 },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+    ]
+    }
+  },
+  "homepage": "https://github.com/larshp/animated-backgrounds#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}

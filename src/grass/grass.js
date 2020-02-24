@@ -1,4 +1,6 @@
-configuration = {
+/* global SVG */
+
+let configuration = {
   leafCountFactor: 5,
   minWidth: 25,
   maxWidth: 50,
@@ -9,12 +11,13 @@ configuration = {
 };
 
 class Grass {
-  draw;
-  width = 0;
-  height = 0;
-  divName = "";
 
   constructor(divName) {
+    this.draw = undefined;
+    this.width = 0;
+    this.height = 0;
+    this.divName = "";
+
     this.divName = divName;
     this.registerEvents();
   }
@@ -34,8 +37,8 @@ class Grass {
     }
 
     return this.draw.gradient('linear', function(add) {
-      add.stop(0, color1)
-      add.stop(1, color2)
+      add.stop(0, color1);
+      add.stop(1, color2);
     }).from(0, 0).to(0, 1);
   }
 
@@ -93,4 +96,4 @@ class Grass {
   }
 }
 
-const g = new Grass("grass").run();
+new Grass("grass").run();

@@ -1,7 +1,6 @@
 let points = [];
 let edges = [];
 let ctx = null;
-var timer = null;
 let colors = ["#f0ab00","#0faaff","#93c939","#760a85","#444532"];
 
 function distance(a, b) {
@@ -63,7 +62,7 @@ function draw() {
     ctx.closePath();
   }
 
-  timer = setTimeout(draw, 50);
+  setTimeout(draw, 50);
 }
 
 function initialize(count = 30) {

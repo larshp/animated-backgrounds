@@ -52,6 +52,7 @@ function update() {
   timer = setTimeout(update, 4000);
 }
 
+// eslint-disable-next-line no-unused-vars
 function hide() {
   clearTimeout(timer);
   for(let i=0; i<squares.length; i++) {
