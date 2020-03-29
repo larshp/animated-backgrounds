@@ -7,10 +7,19 @@
   <link rel="stylesheet" href="grass.css">
 </head>
 <body>
-  <h1>Grass</h1>
-  <div class="box-text">Very LARGE Text</div>
+  <div class="box-text">Green Grass</div>
   <div id="grass" class="box-grass"></div>
   <button onclick="run();">Redraw</button>
+  <button onclick="toggle();">Toggle Greyscale</button>
+  leafCountFactor: <input type="range" min="1" max="20" value="5" id="leafCountFactor" oninput="updateConfig()">
+  minWidth: <input type="range" min="1" max="100" value="25" id="minWidth" oninput="updateConfig()">
+  maxWidth: <input type="range" min="1" max="100" value="50" id="maxWidth" oninput="updateConfig()">
+  minHeight: <input type="range" min="1" max="500" value="50" id="minHeight" oninput="updateConfig()">
+  topRadius: <input type="range" min="1" max="200" value="40" id="topRadius" oninput="updateConfig()">
+  colorMax: <input type="range" min="1" max="255" value="200" id="colorMax" oninput="updateConfig()">
+  colorMin: <input type="range" min="1" max="255" value="100" id="colorMin" oninput="updateConfig()">
+  <br>
+  <pre><tt><div id="config"></div></tt></pre>
   <script src="grass.js"></script>
 </body>
 </html>

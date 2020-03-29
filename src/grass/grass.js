@@ -1,18 +1,18 @@
 /* global SVG */
 
-let configuration = {
-  leafCountFactor: 5,
-  minWidth: 25,
-  maxWidth: 50,
-  minHeight: 50,
-  topRadius: 40,
-  colorMax: 200,
-  colorMin: 100,
-};
-
 class Grass {
-
   constructor(divName) {
+    this.configuration = {
+      leafCountFactor: 5,
+      minWidth: 25,
+      maxWidth: 50,
+      minHeight: 50,
+      topRadius: 40,
+      colorMax: 200,
+      colorMin: 100,
+      grey: false,
+    };
+
     this.draw = undefined;
     this.width = 0;
     this.height = 0;
@@ -23,17 +23,19 @@ class Grass {
   }
 
   randomGreenGardient() {
-    var a = (Math.random() * (configuration.colorMax - configuration.colorMin)) + configuration.colorMin;
-    var b = (Math.random() * (configuration.colorMax - configuration.colorMin)) + configuration.colorMin;
+    var a = (Math.random() * (this.configuration.colorMax - this.configuration.colorMin)) + this.configuration.colorMin;
+    var b = (Math.random() * (this.configuration.colorMax - this.configuration.colorMin)) + this.configuration.colorMin;
 
-    let color1;
-    let color2;
-    if (a > b) {
+    if (a < b) {
+      [a, b] = [b, a];
+    }
+    let color1, color2;
+    if (this.configuration.grey === true) {
+      color1 = new SVG.Color({ r: a, g: a, b: a });
+      color2 = new SVG.Color({ r: b, g: b, b: b });
+    } else {
       color1 = new SVG.Color({ r: 0, g: a, b: 0 });
       color2 = new SVG.Color({ r: 0, g: b, b: 0 });
-    } else {
-      color1 = new SVG.Color({ r: 0, g: b, b: 0 });
-      color2 = new SVG.Color({ r: 0, g: a, b: 0 });
     }
 
     return this.draw.gradient('linear', function(add) {
@@ -49,13 +51,13 @@ class Grass {
   randomLeafs() {
     let leafs = [];
 
-    const count = ( this.width / configuration.maxWidth ) * configuration.leafCountFactor;
+    const count = ( this.width / this.configuration.maxWidth ) * this.configuration.leafCountFactor;
 
     for (let i = 0; i < count; i++) {
       leafs.push({
         left: Math.floor(Math.random() * this.width),
-        width: this.random(configuration.minWidth, configuration.maxWidth),
-        height: this.random(configuration.minHeight, this.height),
+        width: this.random(this.configuration.minWidth, this.configuration.maxWidth),
+        height: this.random(this.configuration.minHeight, this.height),
         gradient: this.randomGreenGardient()});
     }
 
@@ -69,7 +71,7 @@ class Grass {
       const bottomRight = [leaf.left + leaf.width, this.height];
 
       const top = [leaf.left + (leaf.width / 2), this.height - leaf.height];
-      top[0] = top[0] + this.random(-configuration.topRadius, configuration.topRadius);
+      top[0] = top[0] + this.random(-this.configuration.topRadius, this.configuration.topRadius);
 
       const vector1 = [bottomLeft[0], bottomLeft[1] - (leaf.height / 2)];
       const vector2 = [bottomRight[0], bottomRight[1] - (leaf.height / 2)];
@@ -98,9 +100,39 @@ class Grass {
   }
 }
 
-const g = new Grass("grass").run();
+let g;
+run();
+
+function outputConfig() {
+  document.getElementById("config").innerHTML = JSON.stringify(g.configuration, null, 2);
+}
 
 // eslint-disable-next-line no-unused-vars
 function run() {
+  if (!g) {
+    g = new Grass("grass").run();
+  }
   g.run();
+  outputConfig();
+}
+
+// eslint-disable-next-line no-unused-vars
+function toggle() {
+  g.configuration.grey = !g.configuration.grey;
+  g.run();
+  outputConfig();
+}
+
+// eslint-disable-next-line no-unused-vars
+function updateConfig() {
+  g.configuration.leafCountFactor = parseInt(document.getElementById("leafCountFactor").value);
+  g.configuration.minWidth = parseInt(document.getElementById("minWidth").value);
+  g.configuration.maxWidth = parseInt(document.getElementById("maxWidth").value);
+  g.configuration.minHeight = parseInt(document.getElementById("minHeight").value);
+  g.configuration.topRadius = parseInt(document.getElementById("topRadius").value);
+  g.configuration.colorMax = parseInt(document.getElementById("colorMax").value);
+  g.configuration.colorMin = parseInt(document.getElementById("colorMin").value);
+
+  g.run();
+  outputConfig();
 }
